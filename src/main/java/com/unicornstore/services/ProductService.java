@@ -7,7 +7,7 @@ import com.unicornstore.models.ProductRequest;
 import java.util.List;
 
 public interface ProductService {
-    String addProduct(ProductRequest productRequest);
+    String addProductToProductsList(ProductRequest productRequest);
     List<Product> viewAllProducts();
 
     List<Product> viewProductsByCategory(ProductCategory productCategory);

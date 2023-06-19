@@ -25,22 +25,17 @@ public class Product {
     private Rating rating;
     private UserRole userRole;
 
-    public Product(String productName, String description, BigDecimal price, ProductCategory productCategory) {
-        this.productName = productName;
-        this.description = description;
-        this.price = price;
-        this.productCategory = productCategory;
-    }
-
     public Product(ProductCategory productCategory) {
         this.productCategory = productCategory;
     }
 
-    public Product(String productName, ProductCategory productCategory) {
+    public Product(String productName, String description, BigDecimal price, ProductCategory productCategory, UserRole userRole) {
         this.productName = productName;
+        this.description = description;
+        this.price = price;
         this.productCategory = productCategory;
+        this.userRole = userRole;
     }
-
 
     public ProductCategory getProductCategory() {
         return productCategory;

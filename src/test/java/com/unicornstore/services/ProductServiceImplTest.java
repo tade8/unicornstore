@@ -1,7 +1,7 @@
 package com.unicornstore.services;
 
 import com.unicornstore.enums.ProductCategory;
-import com.unicornstore.models.Product;
+import com.unicornstore.enums.UserRole;
 import com.unicornstore.models.ProductRequest;
 import com.unicornstore.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -34,7 +33,8 @@ class ProductServiceImplTest {
                 "MacBook",
                 "15-inch MacBook Pro",
                 new BigDecimal(2_000_000),
-                ProductCategory.ELECTRONICS
+                ProductCategory.ELECTRONICS,
+                UserRole.ADMIN
         );
     }
 
@@ -44,11 +44,18 @@ class ProductServiceImplTest {
     }
 
     @Test
-    void addProduct() {
+    void addProductToProductsListGetsSaved() {
         when(productRepository.save(any())).then(returnsFirstArg());
-        productService.addProduct(productRequest);
-        assertEquals(ProductCategory.ELECTRONICS, productRequest.getProductCategory());
+        productService.addProductToProductsList(productRequest);
         verify(productRepository).save(any());
+    }
+
+    @Test
+    void onlyAdmin_CanAddProduct_ToProductsList() {
+        when(productRepository.save(any())).then(returnsFirstArg());
+        productService.addProductToProductsList(productRequest);
+        assertEquals(UserRole.ADMIN, productRequest.getUserRole());
+        assertNotEquals(UserRole.CUSTOMER, productRequest.getUserRole());
     }
 
     @Test
@@ -58,14 +65,8 @@ class ProductServiceImplTest {
     }
 
     @Test
-    public void viewProductByCategory() {
-        Product product = new Product("Coffee", ProductCategory.BEVERAGES);
-        Product product2 = new Product("MacBook", ProductCategory.ELECTRONICS);
-
-        when(productRepository.findByCategory(ProductCategory.BEVERAGES)).thenReturn(List.of(product));
+    public void viewProductBy_CategoryReturns_CategoryObject() {
         productService.viewProductsByCategory(ProductCategory.BEVERAGES);
-
-        assertEquals(productRepository.findByCategory(ProductCategory.BEVERAGES),
-                List.of(product));
+        verify(productRepository).findProductByCategory(ProductCategory.BEVERAGES);
     }
 }
