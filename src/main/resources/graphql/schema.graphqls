@@ -1,0 +1,61 @@
+type Query {
+    viewAllProducts: [Product]
+    viewProductsByCategory(productCategory: ProductCategory): [Product]
+    removeProductFromProductsList(id: String): String
+    rateProduct(id: String): Int
+    addProductToShoppingCart(id: String): String
+    removeProductFromShoppingCart(id: String, productId: String): String
+}
+
+type Product {
+    id: ID
+    productName: String!
+    description: String!
+    price: String!
+    cart: Cart
+    productCategory: ProductCategory!
+    userRole: UserRole!
+}
+
+type Cart {
+    id: ID
+    productList: [Product]
+}
+
+type Mutation {
+    addProductsToList(productRequest: ProductRequest): String
+    makePayments(orderRequest: OrderRequest): String
+}
+
+type OrderResponse {
+    status: Boolean!
+    message: String!
+    paymentUrl: String!
+}
+
+input ProductRequest {
+    id: ID
+    productName: String!
+    description: String!
+    price: String!
+    productCategory: ProductCategory!
+    userRole: UserRole!
+}
+
+input OrderRequest {
+    name: String!
+    amount: String!
+    description: String!
+    redirectUrl: String
+    collectPhone: Boolean
+}
+
+enum ProductCategory {
+    ELECTRONICS
+    BEVERAGES
+}
+
+enum UserRole {
+    ADMIN
+    CUSTOMER
+}

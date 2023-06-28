@@ -1,28 +1,32 @@
-package com.unicornstore.models;
+package com.unicorn.store.models;
 
-import com.unicornstore.enums.ProductCategory;
-import com.unicornstore.enums.Rating;
-import com.unicornstore.enums.UserRole;
+import com.unicorn.store.enums.*;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 import java.math.BigDecimal;
+
 @Entity
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class Product {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+    @NotBlank
     private String productName;
+    @NotBlank
     private String description;
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "cart_id")
     private Cart cart;
+    private int rating;
     @Enumerated(EnumType.STRING)
-    private Rating rating;
     private UserRole userRole;
 
     public Product(ProductCategory productCategory) {
@@ -35,6 +39,13 @@ public class Product {
         this.price = price;
         this.productCategory = productCategory;
         this.userRole = userRole;
+    }
+
+    public Product(String productName, String description, BigDecimal price, ProductCategory productCategory) {
+        this.productName = productName;
+        this.description = description;
+        this.price = price;
+        this.productCategory = productCategory;
     }
 
     public ProductCategory getProductCategory() {

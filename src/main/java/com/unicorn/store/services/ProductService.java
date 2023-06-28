@@ -1,8 +1,8 @@
-package com.unicornstore.services;
+package com.unicorn.store.services;
 
-import com.unicornstore.enums.ProductCategory;
-import com.unicornstore.models.Product;
-import com.unicornstore.models.ProductRequest;
+import com.unicorn.store.enums.ProductCategory;
+import com.unicorn.store.models.Product;
+import com.unicorn.store.requests.ProductRequest;
 
 import java.util.List;
 
@@ -11,4 +11,6 @@ public interface ProductService {
     List<Product> viewAllProducts();
 
     List<Product> viewProductsByCategory(ProductCategory productCategory);
+
+    String removeProductFromProductsList(String id);
 }

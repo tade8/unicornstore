@@ -1,10 +1,12 @@
 package com.unicornstore.models;
 
-import com.unicornstore.enums.ProductCategory;
+import com.unicorn.store.enums.ProductCategory;
+import com.unicorn.store.models.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ProductTest {
     private Product product;
@@ -12,6 +14,7 @@ class ProductTest {
     @BeforeEach
     void setUp() {
         product = new Product(ProductCategory.ELECTRONICS);
+        assertNotNull(product);
     }
 
     @Test
