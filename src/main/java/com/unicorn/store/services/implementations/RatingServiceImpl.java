@@ -15,10 +15,25 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public int rateProduct(String id) {
-        Product product = productRepository.findProductById(id).
-                orElseThrow(()-> new NullPointerException("This product does not exist"));
+        Product product = getProductById(id);
         product.setRating(product.getRating()+1);
         productRepository.save(product);
         return product.getRating();
+    }
+
+    private Product getProductById(String id) {
+        return productRepository.findProductById(id).
+                orElseThrow(()-> new NullPointerException("This product does not exist"));
+    }
+
+    @Override
+    public String removeProductRating(String id) {
+        Product product = getProductById(id);
+        if (product.getRating() == 0) {
+            return "Product has no rating";
+        }
+        product.setRating(product.getRating()-1);
+        productRepository.save(product);
+        return "Rating removed";
     }
 }

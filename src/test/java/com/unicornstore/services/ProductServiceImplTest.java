@@ -98,9 +98,7 @@ class ProductServiceImplTest {
         when(productRepository.findAllByProductCategory(ProductCategory.ELECTRONICS)).thenReturn(List.of(product));
         assertEquals(List.of(product), productService.viewProductsByCategory(
                 ProductCategory.ELECTRONICS));
-//        assertEquals(List.of(product), productRepository.
-//                findAllByProductCategory(ProductCategory.ELECTRONICS));
-//        verify(productRepository).findAllByProductCategory(ProductCategory.ELECTRONICS);
+        verify(productRepository).findAllByProductCategory(ProductCategory.ELECTRONICS);
     }
 
 }

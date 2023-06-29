@@ -1,10 +1,11 @@
 type Query {
-    viewAllProducts: [Product]
-    viewProductsByCategory(productCategory: ProductCategory): [Product]
-    removeProductFromProductsList(id: String): String
-    rateProduct(id: String): Int
-    addProductToShoppingCart(id: String): String
-    removeProductFromShoppingCart(id: String, productId: String): String
+    viewAllProducts: [Product]!
+    viewProductsByCategory(productCategory: ProductCategory): [Product]!
+    removeProductFromProductsList(id: String): String!
+    rateProduct(id: String): Int!
+    addProductToShoppingCart(id: String): String!
+    removeProductFromShoppingCart(id: String, productId: String): String!
+    removeProductRating(id: String): String!
 }
 
 type Product {
@@ -23,8 +24,8 @@ type Cart {
 }
 
 type Mutation {
-    addProductsToList(productRequest: ProductRequest): String
-    makePayments(orderRequest: OrderRequest): String
+    addProductsToList(productRequest: ProductRequest): String!
+    makePayments(orderRequest: OrderRequest): String!
 }
 
 type OrderResponse {

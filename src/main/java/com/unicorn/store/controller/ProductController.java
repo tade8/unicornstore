@@ -4,11 +4,8 @@ import com.unicorn.store.enums.ProductCategory;
 import com.unicorn.store.models.Product;
 import com.unicorn.store.requests.ProductRequest;
 import com.unicorn.store.services.ProductService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
-import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +18,7 @@ public class ProductController {
     private final ProductService productService;
 
     @MutationMapping
-    public String addProductsToList(@Valid @Argument ProductRequest productRequest) {
+    public String addProductsToList(@Argument ProductRequest productRequest) {
          return productService.addProductToProductsList(productRequest);
     }
 

@@ -34,10 +34,10 @@ public class Product {
     }
 
     public Product(String productName, String description, BigDecimal price, ProductCategory productCategory, UserRole userRole) {
+        this(productCategory);
         this.productName = productName;
         this.description = description;
         this.price = price;
-        this.productCategory = productCategory;
         this.userRole = userRole;
     }
 
