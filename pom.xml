@@ -13,17 +13,14 @@
     <artifactId>store</artifactId>
     <version>1.0</version>
     <properties>
-
-<!--        <maven.compiler.source>1.8</maven.compiler.source>-->
-<!--        <maven.compiler.target>1.8</maven.compiler.target>-->
-        <java.version>18</java.version>
-        <start-class>com.unicorn.store.UnicornStoreApplication</start-class>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.0.2</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -64,11 +61,6 @@
             <artifactId>spring-boot-starter-graphql</artifactId>
             <version>2.7.9</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.graphql-java-kickstart</groupId>-->
-<!--            <artifactId>graphql-spring-boot-starter</artifactId>-->
-<!--            <version>11.1.0</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>

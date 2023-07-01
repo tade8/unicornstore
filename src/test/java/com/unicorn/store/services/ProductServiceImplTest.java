@@ -1,4 +1,4 @@
-package com.unicornstore.services;
+package com.unicorn.store.services;
 
 import com.unicorn.store.enums.ProductCategory;
 import com.unicorn.store.enums.UserRole;
@@ -12,9 +12,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,6 +32,8 @@ class ProductServiceImplTest {
     @Mock
     private ProductRepository productRepository;
     private ProductRequest productRequest;
+    @Mock
+    private MultipartFile file;
 
     @BeforeEach
     void setUp() {
@@ -38,7 +42,8 @@ class ProductServiceImplTest {
                 "15-inch MacBook Pro",
                 "2000000",
                 ProductCategory.ELECTRONICS,
-                UserRole.ADMIN);
+                UserRole.ADMIN
+        );
     }
 
     @Test
@@ -47,16 +52,17 @@ class ProductServiceImplTest {
     }
 
     @Test
-    void addProductToProductsListGetsSaved() {
+    void addProductToProductsListGetsSaved() throws IOException {
         when(productRepository.save(any())).then(returnsFirstArg());
-        productService.addProductToProductsList(productRequest);
+        String product = productService.addProductToProductsList(productRequest, file);
         verify(productRepository).save(any());
+        assertEquals("Product added", product);
     }
 
     @Test
-    void onlyAdmin_CanAddProduct_ToProductsList() {
+    void onlyAdmin_CanAddProduct_ToProductsList() throws IOException {
         when(productRepository.save(any())).then(returnsFirstArg());
-        productService.addProductToProductsList(productRequest);
+        productService.addProductToProductsList(productRequest, file);
         assertEquals(UserRole.ADMIN, productRequest.getUserRole());
         assertNotEquals(UserRole.CUSTOMER, productRequest.getUserRole());
     }
@@ -65,7 +71,7 @@ class ProductServiceImplTest {
     public void testExceptionIsThrownWhenWrongPriceTypeIsProvided() {
         productRequest.setPrice("2000.00");
         assertThrows(NumberFormatException.class,
-                ()-> productService.addProductToProductsList(productRequest));
+                ()-> productService.addProductToProductsList(productRequest, file));
     }
     @Test
     public void removeProductFromProductsList() {
@@ -95,8 +101,8 @@ class ProductServiceImplTest {
                 new BigDecimal("200000"),
                 ProductCategory.ELECTRONICS,
                 UserRole.ADMIN);
-        when(productRepository.findAllByProductCategory(ProductCategory.ELECTRONICS)).thenReturn(List.of(product));
-        assertEquals(List.of(product), productService.viewProductsByCategory(
+        when(productRepository.findAllByProductCategory(ProductCategory.ELECTRONICS)).thenReturn(Collections.singletonList(product));
+        assertEquals(Collections.singletonList(product), productService.viewProductsByCategory(
                 ProductCategory.ELECTRONICS));
         verify(productRepository).findAllByProductCategory(ProductCategory.ELECTRONICS);
     }

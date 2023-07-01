@@ -1,8 +1,7 @@
 package com.unicorn.store.services.implementations;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 import com.unicorn.store.exceptions.GenericException;
 import com.unicorn.store.requests.OrderRequest;
 import com.unicorn.store.response.OrderResponse;
@@ -43,7 +42,6 @@ public class OrderServiceImpl implements OrderService {
 
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
-                assert response.body() != null;
                 String responseBody = response.body().string();
                 log.info("Data " + responseBody);
 

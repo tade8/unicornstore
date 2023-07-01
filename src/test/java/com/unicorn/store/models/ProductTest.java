@@ -1,4 +1,4 @@
-package com.unicornstore.models;
+package com.unicorn.store.models;
 
 import com.unicorn.store.enums.ProductCategory;
 import com.unicorn.store.models.Product;

@@ -1,9 +1,12 @@
-package com.unicornstore.services;
+package com.unicorn.store.services;
 
 import com.unicorn.store.enums.ProductCategory;
-import com.unicorn.store.models.*;
+import com.unicorn.store.enums.UserRole;
+import com.unicorn.store.models.Cart;
+import com.unicorn.store.models.Product;
+import com.unicorn.store.repository.CartRepository;
+import com.unicorn.store.repository.ProductRepository;
 import com.unicorn.store.requests.ProductRequest;
-import com.unicorn.store.repository.*;
 import com.unicorn.store.services.implementations.CartServiceImpl;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,7 +41,7 @@ class CartServiceImplTest {
                 "MacBook",
                 "15-inch MacBook Pro",
                 new BigDecimal(2_000_000),
-                ProductCategory.ELECTRONICS
+                ProductCategory.ELECTRONICS, UserRole.ADMIN
         );
     }
 

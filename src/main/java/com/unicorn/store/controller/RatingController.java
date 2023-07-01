@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("unicorn/store/product")
+@RequestMapping("unicorn/store/product/")
 @RequiredArgsConstructor
 public class RatingController {
     private final RatingService ratingService;

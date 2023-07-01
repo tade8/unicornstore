@@ -2,11 +2,10 @@ package com.unicorn.store.exceptions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.unicorn.store.response.APIResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler({GenericException.class, NumberFormatException.class, JsonProcessingException.class})
     public ResponseEntity<?> handleException(RuntimeException exception) {

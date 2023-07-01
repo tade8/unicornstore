@@ -20,9 +20,10 @@ public class Product {
     @NotBlank
     private String description;
     private BigDecimal price;
+    private String filePath;
     @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cart_id")
     private Cart cart;
     private int rating;
@@ -33,19 +34,21 @@ public class Product {
         this.productCategory = productCategory;
     }
 
-    public Product(String productName, String description, BigDecimal price, ProductCategory productCategory, UserRole userRole) {
+    public Product(String productName, String description, BigDecimal price, ProductCategory productCategory, UserRole userRole, String filePath) {
         this(productCategory);
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.userRole = userRole;
+        this.filePath = filePath;
     }
 
-    public Product(String productName, String description, BigDecimal price, ProductCategory productCategory) {
+    public Product(String productName, String description, BigDecimal price, ProductCategory productCategory, UserRole userRole) {
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.productCategory = productCategory;
+        this.userRole = userRole;
     }
 
     public ProductCategory getProductCategory() {

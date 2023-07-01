@@ -1,4 +1,4 @@
-package com.unicornstore.services;
+package com.unicorn.store.services;
 
 import com.unicorn.store.models.Product;
 import com.unicorn.store.repository.ProductRepository;

@@ -3,11 +3,10 @@ package com.unicorn.store.controller;
 import com.unicorn.store.services.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("unicorn/store/product")
+@RestController
+@RequestMapping("unicorn/store/product/")
 @RequiredArgsConstructor
 public class CartController {
     private final CartService cartService;
