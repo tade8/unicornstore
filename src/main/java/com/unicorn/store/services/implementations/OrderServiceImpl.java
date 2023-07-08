@@ -6,6 +6,7 @@ import com.unicorn.store.exceptions.GenericException;
 import com.unicorn.store.requests.OrderRequest;
 import com.unicorn.store.response.OrderResponse;
 import com.unicorn.store.services.OrderService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.Objects;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final ObjectMapper mapper = new ObjectMapper();
     private final String SECRET_KEY = System.getenv("PAYSTACK_SECRET_KEY");
@@ -56,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
             else {
                 throw new GenericException(
                         "HTTP request was not successful. Response code: " +
-                                response.code());
+                                response.message());
 
             }
         }
