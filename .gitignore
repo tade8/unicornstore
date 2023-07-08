@@ -1,4 +1,4 @@
-config.env
-target
-.idea
+target/
+.idea/
 *.iml
+*.env
